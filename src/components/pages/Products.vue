@@ -12,7 +12,7 @@
                     <td width="120">分類</td>
                     <td width="180">產品名稱</td> <!-- 給較多空間 -->
                     <td width="100">原價</td>
-                    <td width="100">售價</td>
+                    <td width="100">特價</td>
                     <td width="80">是否啟用</td>
                     <td width="130">編輯</td>
 
