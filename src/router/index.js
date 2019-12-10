@@ -1,14 +1,25 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-//上方為官方元件
-import Login from '@/components/pages/Login';
-import Dashboard from '@/components/Dashboard';
-import Products from '@/components/pages/Products';
-import Order from '@/components/pages/Order';
-import Coupon from '@/components/pages/Coupon';
-import CustomerOrder from '@/components/pages/CustomerOrder';
-import CustomerCheckout from '@/components/pages/CustomerCheckout';
-//自訂的分頁元件
+//官方元件
+
+//pages
+import Login from '@/components/Login';
+
+//admin
+import Dashboard from '@/components/Admin/Dashboard';
+import Products from '@/components/Admin/pages/Products';
+import Order from '@/components/Admin/pages/Order';
+import Coupon from '@/components/Admin/pages/Coupon';
+
+
+//client
+import Layout from '@/components/Client/Layout';
+import Home from '@/components/Client/Home';
+import ProductList from '@/components/Client/pages/ProductList';
+import ProductDetail from '@/components/Client/pages/ProductDetail';
+import OrderCheck from '@/components/Client/pages/OrderCheck';
+import OrderClientData from '@/components/Client/pages/OrderClientData';
+import OrderComplete from '@/components/Client/pages/OrderComplete';
 
 
 
@@ -18,34 +29,36 @@ Vue.use(VueRouter);
 export default new VueRouter({
     routes:[
 
-        { //當隨便輸入錯誤網址時，會導入至login頁面
+        { //輸入錯誤網址會回到login頁
             path:'*',
             redirect:'login',
         },
     
         {
-            path:'/login', //指定路徑
-            name:'Login', //元件名稱
-            component: Login, //對應import元件名稱
+            path:'/login', 
+            name:'Login', 
+            component: Login, 
         },
+
+
         {
             path:'/admin',
             name:'Dashboard',
             component: Dashboard,
             children:[
-                {   path:'products', //巢狀http://admin/products
+                {   path:'products', 
                     name:'products',
                     component: Products,
-                    meta: { requiresAuth: true }, //執行導航守衛以判定是否已登入
+                    meta: { requiresAuth: true }, //導航守衛
                 },
 
-                {   path:'orders', //巢狀http://admin/orders
+                {   path:'orders', 
                     name:'orders',
                     component: Order,
                     meta: { requiresAuth: true },
                 },
 
-                {   path:'coupons', //巢狀http://admin/coupons
+                {   path:'coupons', 
                     name:'coupons',
                     component: Coupon,
                     meta: { requiresAuth: true },
@@ -57,17 +70,37 @@ export default new VueRouter({
 
         {
             path:'/',
-            name:'Dashboard',
-            component: Dashboard,
+            name:'Layout',
+            component: Layout,
             children:[
-                {   path:'customer_order', //巢狀http://admin/products //路徑建議小寫
-                    name:'CustomerOrder',
-                    component: CustomerOrder,
+                {   path:'/', 
+                    name:'Home',
+                    component: Home,
                 },
 
-                {   path:'customer_checkout/:orderId', //巢狀http://admin/products //路徑建議小寫
-                    name:'CustomerCheckout',
-                    component: CustomerCheckout,
+                 {   path:'/product_list',
+                    name:'productList',
+                    component: ProductList,
+                },
+
+                {   path:'/product_detail',
+                    name:'PorductDetail',
+                    component: ProductDetail,
+                },
+
+                {   path:'/order_check',
+                    name:'OrderCheck',
+                    component: OrderCheck,
+                },
+
+                {   path:'/order_clientdata',
+                    name:'OrderClientData',
+                    component: OrderClientData,
+                },
+
+                {   path:'/order_complete',
+                    name:'OrderComplete',
+                    component: OrderComplete,
                 },
 
             ]
