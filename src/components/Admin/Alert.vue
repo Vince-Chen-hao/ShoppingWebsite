@@ -30,9 +30,9 @@ export default {
       this.removeMessageWithTiming(timestamp);
     },
     removeMessage(num) {
-      this.messages.splice(num, 1); //點擊X移除
+      this.messages.splice(num, 1); //點擊X
     },
-    removeMessageWithTiming(timestamp) { //五秒自動移除
+    removeMessageWithTiming(timestamp) { //5秒自動移除
       const vm = this;
       setTimeout(() => {
         vm.messages.forEach((item, i) => {

@@ -10,14 +10,12 @@
             <thead>
                 <tr>
                     <td width="120">分類</td>
-                    <td width="180">產品名稱</td> <!-- 給較多空間 -->
+                    <td width="180">產品名稱</td> <!-- 較多空間 -->
                     <td width="100">原價</td>
                     <td width="100">售價</td>
                     <td width="80">是否啟用</td>
                     <td width="130">編輯</td>
-
                 </tr>
-
             </thead>
             <tbody>
                 <tr v-for="(item) in products" :key="item.id">
@@ -30,7 +28,7 @@
                         {{item.price| currency}}
                     </td>
                     <td>
-                        <span v-if="item.is_enable" class="text-success">啟用</span>
+                        <span v-if="item.is_enabled" class="text-success">啟用</span>
                         <span v-else class="text-danger" >未啟用</span>
                     </td>
                     <td>
@@ -39,40 +37,14 @@
                         @click="openModal(false,item)">編輯</button>
                         <button class="btn btn-outline-danger btn-sm"  
                         @click="openDelModal(item)">刪除</button><!-- 重點在於回傳item原有值，以告知程式刪除的特定資料 -->
-
                         </div>
-
                     </td>
-            
-
-                    
-                   
-
                 </tr>
             </tbody>
 
         </table>
-        <!-- 列表數字欄位 -->
-        <!-- <nav aria-label="Page navigation example">
-            <ul class="pagination">
-                <li class="page-item" :class="{'disabled': !pagination.has_pre}">
-                <a class="page-link" href="#" aria-label="Previous"
-                    @click.prevent="getProducts(pagination.current_page -1)">
-                    <span aria-hidden="true">&laquo;</span>
-                </a>
-                </li>
-                <li class="page-item" v-for="page in pagination.total_pages" :key="page"
-                :class="{'active': pagination.current_page === page}" >
-                    <a class="page-link" href="#" @click.prevent="getProducts(page)">{{page}}</a></li>
-                <li class="page-item"  :class="{'disabled': !pagination.has_next}">
-                <a class="page-link" href="#" aria-label="Next"
-                @click.prevent="getProducts(pagination.current_page +1)">
-                    <span aria-hidden="true">&raquo;</span>
-                </a>
-                </li>
-            </ul>
-            </nav> -->
-            <Pagination :page-props="pagination" @pagenum_emit="getProducts"></Pagination>
+        <Pagination :page-props="pagination" @pagenum_emit="getProducts"></Pagination>
+        
         <!-- Modal -->
         <div class="modal fade" id="productModal" tabindex="-1" role="dialog"
             aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -179,7 +151,6 @@
         </div>
         
         </div>
-
             <div class="modal fade" id="delProductModal" tabindex="-1" role="dialog"
             aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog" role="document">
@@ -204,17 +175,13 @@
                 </div>
             </div>
             </div>
-        
     </div>
-
-
 </template>
 
 <script>
 import $ from 'jquery';
 import Pagination from '@/components/Pagination';
-
-
+import { mapGetters} from 'vuex';
 
 
 
@@ -224,38 +191,27 @@ export default {
     },
     data(){
         return{
-            products:[],
             tempProduct:{},
             isNew:false,
             isLoading:false,
             status:{
                 fileUploading:false,
             },
-            pagination:{},
         };
     },
     methods:{
-        getProducts(page = 1){ //ES6預設值，如無代數值便會使用原先1，有參數則使用參數數值
-            const api = `${process.env.APIPATH}/api/${process.env.CUSTOMPATH}/admin/products?page=${page}`;
-            const vm = this;
-            vm.isLoading = true;
-            this.$http.get(api).then((response) => { 
-                console.log(response.data);
-                vm.isLoading= false;
-                vm.products = response.data.products //將取得資料的products項目匯入data的空陣列裡
-                vm.pagination = response.data.pagination;
-           }); 
-            
+        getProducts(page = 1){ 
+            this.$store.dispatch('getProducts',page);
         },
 
-        //遠端取到資料後，才將“跳出視窗”開啟，就比需要用“事件”來操作
+        //後端取得資料後，才將“跳出視窗”開啟，需要用“事件”來操作
         openModal(isNew , item){
             
             if(isNew){
                 this.tempProduct= {};
                 this.isNew=true;
             }else{
-                //this.tempProduct= item;  //因為物件傳參考的特性，直接用item會與tmepProduct相同
+                //this.tempProduct= item;  //因物件傳參考的特性，直接用item會與tmepProduct相同
                 this.tempProduct= Object.assign({},item); //可採用es6語法，將item傳自獨立的空物件裡，才不會互相渲染
                 this.isNew=false;
             }
@@ -332,12 +288,14 @@ export default {
                     
                 }
             })
-            }
-        },
+        }
+    },
+    computed:{
+        ...mapGetters(['products','pagination'])
+    },
+
     created(){ //新增以觸發getProducts事件
         this.getProducts();
-        
- 
     }
 };
 </script>

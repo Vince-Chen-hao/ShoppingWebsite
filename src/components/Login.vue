@@ -1,22 +1,23 @@
 <template>
   <div>
-      <form class="form-signin" @submit.prevent="signin">
-        <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
-        <label for="inputEmail" class="sr-only">Email address</label>
-        <input type="email" id="inputEmail" class="form-control" 
-            placeholder="Email address" v-model="user.username" required autofocus>
-        <label for="inputPassword" class="sr-only">Password</label>
-        <input type="password" id="inputPassword" class="form-control" 
-            placeholder="Password"  v-model="user.password" required>
-        <div class="checkbox mb-3">
-            <label>
-                <input type="checkbox" value="remember-me"> Remember me
-            </label>
-  </div>
-  <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
-  <p class="mt-5 mb-3 text-muted">&copy; 2017-2019</p>
-</form>
-
+    <form class="form-signin" @submit.prevent="signin">
+      <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
+      <label for="inputEmail" class="sr-only">Email address</label>
+      <input type="email" id="inputEmail" class="form-control" 
+        placeholder="Email address" v-model="user.username" required autofocus
+      >
+      <label for="inputPassword" class="sr-only">Password</label>
+      <input type="password" id="inputPassword" class="form-control" 
+        placeholder="Password"  v-model="user.password" required
+      >
+      <div class="checkbox mb-3">
+        <label>
+          <input type="checkbox" value="remember-me"> Remember me
+        </label>
+      </div>
+      <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+       <p class="mt-5 mb-3 text-muted">&copy; 2017-2019</p>
+    </form>
   </div>
 </template>
 
@@ -33,17 +34,16 @@ export default {
     };
   },
   methods:{
-      signin(){
-        const api = `${process.env.APIPATH}/admin/signin`; //依登入api說明新增(左：路徑，右：API功能)
-        const vm = this;
-        this.$http.post(api, vm.user).then((response) => { //api後方連結data裡的user
-            console.log(response.data);
-            if(response.data.success){
-                vm.$router.push('/admin/products')
-            }
+    signin(){
+      const api = `${process.env.APIPATH}/admin/signin`; //依登入api說明新增(左：路徑，右：API功能)
+      const vm = this;
+      this.$http.post(api, vm.user).then((response) => { //api後方連結data裡的user
+        console.log(response.data);
+        if(response.data.success){
+          vm.$router.push('/admin/products')
+        }
       });
-
-      }
+    }
   }
 };
 </script>

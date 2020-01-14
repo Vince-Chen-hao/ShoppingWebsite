@@ -16,14 +16,9 @@
                     <td width="130">編輯</td>
 
                 </tr>
-
             </thead>
-
-
-
-            
             <tbody>
-                <tr v-for="(item) in coupons" :key="item.id">
+                <tr v-for="(item,key) in coupons" :key="key">
                     <td>{{item.title}}</td>
                     <td>{{item.percent}}%</td>
                     <td class="text-left">
@@ -31,8 +26,8 @@
                     </td>
         
                     <td>
-                        <span v-if="item.is_enable" class="text-success">啟用</span>
-                        <span v-else class="text-danger" >未啟用</span>
+                        <span v-if="item.is_enabled === 1" class="text-success">啟用</span>
+                        <span v-else class="text-muted" >未啟用</span>
                     </td>
                     <td>
                         <div class="btn-group" role="group" aria-label="Basic example">
@@ -43,20 +38,13 @@
                         @click="openDelModal(item)">刪除</button> <!-- 重點在於回傳item原有值，以告知程式刪除的特定資料 -->
                         </div>
                     </td>
-
-                    
-                   
-
                 </tr>
             </tbody>
-
         </table>
         
-            <Pagination :page-props="pagination" @pagenum_emit="getCoupons"></Pagination>
-
-
-        <!-- 跳出視窗Model -->
-
+        <Pagination :page-props="pagination" @pagenum_emit="getCoupons"></Pagination>
+        
+        <!-- UpdataModel -->
         <div class="modal fade" id="couponsModal" tabindex="-1" role="dialog"
             aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-lg" role="document">
@@ -71,7 +59,6 @@
             </div>
             <div class="modal-body">
                 <div class="row">
-
                 <div class="col-sm-12">
                     <div class="form-group col-sm-12">
                     <label for="title">標題</label>
@@ -113,7 +100,6 @@
                         </label>
                     </div>
                     </div>
-
                 </div>
                 </div>
             </div>
@@ -125,7 +111,7 @@
         </div>
         
         </div>
-        <!-- 刪除Modal -->
+        <!-- DeleModal -->
          <div class="modal fade" id="delCouponModal" tabindex="-1" role="dialog"
             aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog" role="document">
@@ -150,11 +136,7 @@
                 </div>
             </div>
             </div>
-
- 
     </div>
-
-
 </template>
 
 <script>
@@ -173,6 +155,7 @@ export default {
             isNew:false,
             pagination:{},
             isLoading:false,
+            is_enabled: 0,
         };
     },
     methods:{
@@ -251,7 +234,6 @@ export default {
         },
 
     },
-
     created(){ 
         this.getCoupons();
     }
