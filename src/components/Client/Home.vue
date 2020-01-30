@@ -134,7 +134,7 @@
   <div class="container mt-4">
     
     <div class="mb-4 joinus" py-4>
-      <h3 id="new">訂閱頻道，取得第一手新品資訊</h3>
+      <h4 id="new">訂閱頻道，取得第一手新品資訊</h4>
       
       <div class="joinus-content">
         <input type="email" name="email" class="form-control" placeholder="Enter your email"
@@ -177,7 +177,6 @@ export default {
 
 
 }
-
 
   $(document).ready(function() {
     $('.top').click(function(event) {
@@ -392,9 +391,9 @@ export default {
   @media (max-width: 767px) {
     padding: 3rem 1rem;
   }
-  h3 {
+  h4 {
     color: white;
-    text-shadow: 1px 1px 1px rgb(145, 141, 133);
+    text-shadow: 1px 1px 1px rgb(143, 142, 132);
   }
 }
 .joinus-content {

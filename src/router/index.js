@@ -76,7 +76,7 @@ export default new VueRouter({
             name:'Layout',
             component: Layout,
             children:[
-                {   path:'/home', 
+                {   path:'/', 
                     name:'Home',
                     component: Home,
                 },

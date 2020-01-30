@@ -180,7 +180,8 @@
       goDetail(id) {
         this.$router.push(`/product_detail/${id}`);
       },
-          getapi() {
+      
+      getapi() {
         const vm = this;
         this.$http.get('https://randomuser.me/api/').then(response => {
           console.log(response)

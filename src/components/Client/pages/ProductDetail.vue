@@ -56,8 +56,6 @@
                 <button type="button" class="btn btn-info" @click="addtoCart(product,optionNum)"><i class='fas fa-plus'></i> 加入購物車</button>
             </div>
           </div>
-
-        
         </div>
       </div>
           
