@@ -1,13 +1,14 @@
 <template>
   <div>
     <div class="marquee">
-      <span><i class="fas fa-bullhorn"></i> 優惠快報</span>
-      <marquee>歡慶聖誕節! 優惠碼大放送~ 輸入優惠券代碼「Christmas」 即可享有全館七折優惠!!</marquee>
+      <span><i class="fas fa-bullhorn"></i> 活動快報</span>
+      <marquee>歡慶LifeHouse品牌創立2週年！限時大放送～ 輸入優惠代碼「HAPPY2YEARS」 享有線上購物7折優惠！！</marquee>
     </div>
+    <div class="naver-title">
     <div class="container mb-4 p-0">
       <nav class="navbar navbar-expand-lg navbar-light ">
-        <router-link to="/home" class="navbar-brand logo
-        bg-transparent shadow-none font-weight-bold">Vince's Store</router-link>
+        <router-link to="/" class="navbar-brand logo
+        bg-transparent shadow-none font-weight-bold">LifeHouse Shop</router-link>
         <button class="navbar-toggler" type="button" data-toggle="collapse"
           data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
           aria-expanded="false" aria-label="Toggle navigation">
@@ -17,14 +18,21 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav mr-auto">
             <li class="nav-item active">
-              <router-link to="/home" class="nav-link">品牌首頁
+              <router-link to="/" class="nav-link">品牌首頁
               </router-link>
             </li>
             <li class="nav-item active">
               <router-link to="/product_list" class="nav-link">購物市集
               </router-link>
             </li>
-           
+            <li class="nav-item active">
+              <router-link to="/coupon_page" class="nav-link">優惠活動
+              </router-link>
+            </li>
+            <li class="nav-item active">
+              <router-link to="/contact_page" class="nav-link">門市資訊
+              </router-link>
+            </li>
           </ul>
 
           <ul class="list-inline mb-0">
@@ -45,6 +53,7 @@
         </div>
       </nav>
     </div>
+    </div>
   </div>
 </template>
 
@@ -54,15 +63,17 @@
 
 
 .marquee{
-    background: #333;
+    background: rgba(67, 83, 81, 0.781);
     color: #fff;
     padding: 2px 5%;
-    display: flex;
+    display: flex;    
+    font-size: 15px;
+
   
     span{
       display: inline-block;
       padding: 0px 10px;
-      font-size: 12px;
+      font-size: 15x;
       border-radius: 3px;
       white-space: nowrap;
     }
@@ -72,6 +83,11 @@
   box-shadow: none;
   font-size: 1.25rem;
   font-weight: bold;
+}
+
+.naver-title{
+  font-size: 15px;
+
 }
 
 .nav-link {

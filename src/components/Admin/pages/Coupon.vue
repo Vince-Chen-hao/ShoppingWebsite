@@ -104,7 +104,7 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">關閉</button>
+                <button type="button" class="btn btn-outline-info" data-dismiss="modal">關閉</button>
                 <button type="button" class="btn btn-primary" @click="updateCoupon">新增優惠券</button>
             </div>
             </div>
@@ -128,7 +128,7 @@
                     是否刪除 <strong class="text-danger">{{ tempcoupons.title }}</strong> 商品(刪除後將無法恢復)。
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">取消</button>
+                    <button type="button" class="btn btn-outline-info" data-dismiss="modal">取消</button>
                     <button type="button" class="btn btn-danger"
                     @click="delCoupon"
                     >確認刪除</button>
@@ -197,6 +197,7 @@ export default {
                 console.log(response.data);
                 if (response.data.success) {
                     $("#delCouponModal").modal("hide");
+                    this.$bus.$emit('message:push',response.data.message,'danger')
                     vm.getCoupons();
                 } else {
                     $("#delCouponModal").modal("hide");
@@ -224,6 +225,8 @@ export default {
                 if(response.data.success){
                     $('#couponsModal').modal('hide');
                     vm.getCoupons();
+                    this.$bus.$emit('message:push',response.data.message,'success')
+
                 }else{
                     $('#couponsModal').modal('hide');
                     vm.getCoupons();

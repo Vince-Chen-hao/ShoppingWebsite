@@ -1,29 +1,28 @@
 <template>
   <div>
-    <form class="form-signin" @submit.prevent="signin">
-      <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
+    <form class="form-signin mt-4" @submit.prevent="signin">
+      <h1 class="h3 mb-3 font-weight-normal ">訂單後台管理中心</h1>
       <label for="inputEmail" class="sr-only">Email address</label>
       <input type="email" id="inputEmail" class="form-control" 
-        placeholder="Email address" v-model="user.username" required autofocus
+        placeholder="請輸入管理員信箱" v-model="user.username" required autofocus
       >
       <label for="inputPassword" class="sr-only">Password</label>
       <input type="password" id="inputPassword" class="form-control" 
-        placeholder="Password"  v-model="user.password" required
+        placeholder="請輸入密碼"  v-model="user.password" required
       >
       <div class="checkbox mb-3">
         <label>
-          <input type="checkbox" value="remember-me"> Remember me
+          <input type="checkbox" value="remember-me"> 記住我
         </label>
       </div>
-      <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
-       <p class="mt-5 mb-3 text-muted">&copy; 2017-2019</p>
+      <button class="btn btn-lg btn-info btn-block" type="submit">登入</button>
+       <p class="mt-5 mb-3 text-muted">ⓒ Copyright 2020 LifeHouseShop</p>
     </form>
   </div>
 </template>
 
 <script>
 export default {
-  name: 'HelloWorld',
   data () {
     return {
         user:{

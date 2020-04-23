@@ -18,7 +18,7 @@
 
 import Sidebar from './Sidebar'
 import Navbar from './Navbar'
-import Alert from './Alert'
+import Alert from '@/components/Alert'
 
 
 

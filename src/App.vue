@@ -8,12 +8,10 @@
 
 <script>
 import { mapGetters } from 'vuex';
-import HelloWorld from './components/HelloWorld'
 
 export default {
   name: 'App',
     components: {
-    HelloWorld
   },
   
   computed: {
@@ -28,6 +26,10 @@ export default {
 
 <style lang="scss">
 @import "./assets/all";
+
+#app{
+  font-family: serif;
+}
 </style>
 
 

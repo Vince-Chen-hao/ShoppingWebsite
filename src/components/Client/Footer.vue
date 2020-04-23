@@ -60,8 +60,8 @@
           </li>
         </ul> -->
       <div class="copyright" >
-        ⓒ Copright 2019 VinceShop 
-        <div class="text-center" style="font-family:monospace">
+        ⓒ Copyright 2020 LifeHouseShop
+        <div class="text-center" >
         僅作為個人作品，無任何商業用途
         </div>
       </div>

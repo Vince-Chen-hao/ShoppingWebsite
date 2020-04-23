@@ -1,7 +1,8 @@
 <template>
     <div>
         <Navbar/>
-        <Alert></Alert>  
+        <loading :active.sync="isLoading"></loading>
+        <Alert></Alert> 
         <router-view></router-view>
         <Footer></Footer>
     </div>
@@ -10,7 +11,7 @@
 <script>
 
 import Navbar from './Navbar'
-import Alert from './Alert'
+import Alert from '@/components/Alert'
 import Footer from './Footer'
 
 

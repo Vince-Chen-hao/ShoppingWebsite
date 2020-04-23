@@ -144,7 +144,7 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">取消</button>
+                <button type="button" class="btn btn-outline-info" data-dismiss="modal">取消</button>
                 <button type="button" class="btn btn-primary" @click="updateProduct">確認</button>
             </div>
             </div>
@@ -167,7 +167,7 @@
                     是否刪除 <strong class="text-danger">{{ tempProduct.title }}</strong> 商品(刪除後將無法恢復)。
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">取消</button>
+                    <button type="button" class="btn btn-outline-info" data-dismiss="modal">取消</button>
                     <button type="button" class="btn btn-danger"
                     @click="delProduct"
                     >確認刪除</button>

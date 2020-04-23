@@ -21,6 +21,11 @@ import ProductDetail from '@/components/Client/pages/ProductDetail';
 import OrderCheck from '@/components/Client/pages/OrderCheck';
 import ClientInfo from '@/components/Client/pages/ClientInfo';
 import OrderComplete from '@/components/Client/pages/OrderComplete';
+import CouponPage from '@/components/Client/pages/Coupon';
+import ContactPage from '@/components/Client/pages/Contact';
+
+
+
 
 
 
@@ -30,87 +35,107 @@ Vue.use(VueRouter);
 
 export default new VueRouter({
     linkActiveClass: 'active', //範例提供
-    routes:[
+    routes: [
 
         { //輸入錯誤網址會回到login頁
-            path:'*',
-            redirect:'/login',
+            path: '*',
+            redirect: '/login',
         },
-    
+
         {
-            path:'/login', 
-            name:'Login', 
-            component: Login, 
+            path: '/login',
+            name: 'Login',
+            component: Login,
         },
 
 
         {
-            path:'/admin',
-            name:'Dashboard',
+            path: '/admin',
+            name: 'Dashboard',
             component: Dashboard,
-            children:[
-                {   path:'products', 
-                    name:'products',
+            children: [{
+                    path: 'products',
+                    name: 'products',
                     component: Products,
                     //meta: { requiresAuth: true }, //導航守衛
                 },
 
-                {   path:'orders', 
-                    name:'orders',
+                {
+                    path: 'orders',
+                    name: 'orders',
                     component: Order,
                     //meta: { requiresAuth: true },
                 },
 
-                {   path:'coupons', 
-                    name:'coupons',
+                {
+                    path: 'coupons',
+                    name: 'coupons',
                     component: Coupon,
                     //meta: { requiresAuth: true },
                 },
+
             ]
 
-            
+
         },
 
         {
-            path:'/',
-            name:'Layout',
+            path: '/',
+            name: 'Layout',
             component: Layout,
-            children:[
-                {   path:'/', 
-                    name:'Home',
+            children: [{
+                    path: '/',
+                    name: 'Home',
                     component: Home,
                 },
 
-                 {  path:'/product_list',
-                    name:'ProductList',
+                {
+                    path: 'product_list',
+                    name: 'ProductList',
                     component: ProductList,
                     props: route => ({ category: route.query.category }),
 
                 },
 
-                {   path:'/product_detail/:MyproductId', //更換為productlist的參數ID
-                    name:'ProductDetail',
+                {
+                    path: 'product_detail/:MyproductId', //更換為productlist的參數ID
+                    name: 'ProductDetail',
                     component: ProductDetail,
                 },
 
-                {   path:'/order_check',
-                    name:'OrderCheck',
+                {
+                    path: 'coupon_page',
+                    name: 'CouponPage',
+                    component: CouponPage,
+                },
+
+                {
+                    path: 'contact_page',
+                    name: 'ContactPage',
+                    component: ContactPage,
+                },
+
+                {
+                    path: 'order_check',
+                    name: 'OrderCheck',
                     component: OrderCheck,
                 },
 
-                {   path:'/client_info',
-                    name:'ClientInfo',
+                {
+                    path: 'client_info',
+                    name: 'ClientInfo',
                     component: ClientInfo,
                 },
 
-                {   path:'/order_complete/:orderId',
-                    name:'OrderComplete',
+                {
+                    path: 'order_complete/:orderId',
+                    name: 'OrderComplete',
                     component: OrderComplete,
                 },
 
             ]
 
-            
+
         },
     ],
 });
