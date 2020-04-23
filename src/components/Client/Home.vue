@@ -233,12 +233,8 @@ export default {
       categories: [
         { name: "DISHES", title: "碗盤", icon: "fas fa-mortar-pestle fa-2x" },
         { name: "MUG", title: "杯與壺", icon: "fas fa-mug-hot fa-2x" },
-        {
-          name: "SPOON",
-          title: "刀叉匙筷",
-          icon: "fas fa-utensil-spoon fa-2x"
-        },
-        { name: "TOOLS", title: "料理廚具", icon: "fas fa-home fa-2x" }
+        { name: "SPOON", title: "刀叉匙筷", icon: "fas fa-utensil-spoon fa-2x"},
+        { name: "TOOLS", title: "料理廚具", icon: "fas fa-home fa-2x" },
       ]
     };
   },

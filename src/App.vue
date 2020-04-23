@@ -14,6 +14,10 @@ export default {
     components: {
   },
   
+  data() {
+    return {};
+  },
+  
   computed: {
     ...mapGetters(['isLoading']),
 

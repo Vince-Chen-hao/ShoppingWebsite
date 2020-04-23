@@ -11,9 +11,9 @@
         </a>
         <div class="popup-wrapper p-4 my-2">
           <div class="popup-content">
-            <h2 class="text-center text-danger py-2">快閃優惠</h2>
-            <p class="text-center lead">歡慶台北品牌概念店正式開幕!</p>
-            <div class="text-center h5">即日起來店打卡合照上傳，就送精美好禮</div>
+            <h2 class="text-center text-danger py-2">活動快報</h2>
+            <p class="text-center lead">慶祝台北品牌概念店正式開幕！</p>
+            <div class="text-center h5">即日起來店打卡合照上傳，就送純銅奶油抹刀</div>
             <div class="activity-num">限量101組</div>
           </div>
           <div class="shine-screen"></div>
@@ -27,7 +27,10 @@
 import $ from "jquery";
 
 export default {
-  data() {},
+  
+  data() {
+    return {};
+  },
   methods: {
     closepopup() {
       $("#popup-overlay").removeClass("d-flex");
