@@ -103,14 +103,14 @@
           <div class="row my-4">
             <div class="col-md-4 mb-4" v-for="(item, index) in filterProducts" :key="index">
               <div class="card-effect card">
-                <div class="container-img">
+                <div class="container-img" >
                   <div
                     class="l-point productlist-img"
-                    @click="goDetail(item.id)"
                     :style="{backgroundImage:`url(${item.imageUrl})`}"
+                    @click="goDetail(item.id)"
                   ></div>
                 </div>
-                <div class="card-body">
+                <div class="card-body l-point" @click="goDetail(item.id)">
                   <span class="badge badge-secondary mb-2">{{ item.category }}</span>
                   <h5 class="card-title">
                     <h5 class="text-dark">{{ item.title }}</h5>
@@ -121,22 +121,14 @@
                     <div class="now-price">NT{{ item.price| currency }}</div>
                   </div>
                 </div>
-                <div class="card-footer d-flex">
+                <div class="card-footer">
                   <button
                     type="button"
-                    class="btn btn-outline-success btn-sm"
-                    @click="goDetail(item.id)"
-                  >
-                    <i class="fas fa-spinner fa-spin" v-if="status.loadingItem === item.id"></i>
-                    商品詳情
-                  </button>
-                  <button
-                    type="button"
-                    class="btn btn-success btn-sm ml-auto text-light"
+                    class="btn btn-secondary btn-block ml-auto text-dark"
                     @click="addtoCart(item)"
                   >
                     <i class="fas fa-spinner fa-spin" v-if="status.loadingItem === item.id"></i>
-                    <span>加入購物車</span>
+                    <i class="fas fa-shopping-bag"></i><span> 立即選購</span>
                   </button>
                 </div>
               </div>

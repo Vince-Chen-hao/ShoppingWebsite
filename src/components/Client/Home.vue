@@ -212,7 +212,7 @@
             <!-- inline轉行內，justify為置中語法 -->
             <input type="text" class="channel-content mb-2 mr-3" placeholder="輸入名稱" />
             <input type="text" class="channel-content mb-2 mr-3" placeholder="輸入信箱" />
-            <button class="btn btn-secondary mb-2" @click.prevent="subscriptComplete">訂閱</button>
+            <button class="btn btn-sm btn-secondary mb-2" @click.prevent="subscriptComplete">送出</button>
           </form>
         </div>
       </div>
