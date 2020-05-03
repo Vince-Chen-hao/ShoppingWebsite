@@ -2,14 +2,18 @@
   <section class="HomeSection">
     <!-- 彈出式蓋板 -->
     <PopupNews></PopupNews>
-    <!-- 點擊置頂效果 -->
-    <div class="SliderTop">
+    <!-- 點擊滑動置頂 -->
+    <div id="SliderTop">
       <img class="SliderTop-img" src="../../assets/images/up3.png" alt="cart" />
     </div>
 
     <section id="CarouselSlider">
       <div class="container mb-4">
-        <div id="carouselHomeControls" class="carousel slide" data-ride="carousel">
+        <div
+          id="carouselHomeControls"
+          class="carousel slide"
+          data-ride="carousel"
+        >
           <div class="carousel-inner">
             <div class="carousel-item active w-100 l-bg-cover carousel01">
               <div class="inside-banner">
@@ -50,7 +54,6 @@
       </div>
     </section>
 
-    <!-- 產品分類列表 -->
     <section id="CategoryList">
       <div class="container">
         <ul class="row mr-4 category-list justify-content-around">
@@ -62,8 +65,8 @@
           >
             <i :class="category.icon"></i>
             <ul style="list-style-type:none ">
-              <li>{{category.name}}</li>
-              <li>{{category.title}}</li>
+              <li>{{ category.name }}</li>
+              <li>{{ category.title }}</li>
             </ul>
           </li>
         </ul>
@@ -75,42 +78,54 @@
         <h3>產品風格</h3>
         <hr />
         <div class="row mb-4">
-          <div class="col-sm-4">
+          <div class="col-sm-4 my-1">
             <div class="l-bg-cover rounded type01 img-thumbnail">
               <router-link class="black-cover" to="/product_list">
-                <span class="h5">陶瓷</span>
+                <span class="h4">陶瓷</span>
               </router-link>
             </div>
           </div>
-          <div class="col-sm-4">
+          <div class="col-sm-4 my-1">
             <div class="l-bg-cover rounded type02 img-thumbnail">
-              <router-link class="black-cover" style="text-decoration: none" to="/product_list">
-                <span class="h5">釉燒</span>
+              <router-link
+                class="black-cover"
+                style="text-decoration: none"
+                to="/product_list"
+              >
+                <span class="h4">釉燒</span>
               </router-link>
             </div>
           </div>
 
-          <div class="col-sm-4">
+          <div class="col-sm-4 my-1">
             <div class="l-bg-cover rounded type03 img-thumbnail">
-              <router-link class="black-cover" style="text-decoration: none" to="/product_list">
-                <span class="h5">磨砂</span>
+              <router-link
+                class="black-cover"
+                style="text-decoration: none"
+                to="/product_list"
+              >
+                <span class="h4">磨砂</span>
               </router-link>
             </div>
           </div>
         </div>
 
         <div class="row mb-4">
-          <div class="col-md-6">
+          <div class="col-md-6 my-1">
             <div class="l-bg-cover rounded type04 img-thumbnail">
               <router-link class="black-cover" to="/product_list">
-                <span class="font-weight-bold h3">北歐家居</span>
+                <span class=" h4">北歐家居</span>
               </router-link>
             </div>
           </div>
-          <div class="col-md-6">
+          <div class="col-md-6 my-1">
             <div class="l-bg-cover rounded type05 img-thumbnail">
-              <router-link class="black-cover" style="text-decoration: none" to="/product_list">
-                <span class="font-weight-bold h3">典雅皇室</span>
+              <router-link
+                class="black-cover"
+                style="text-decoration: none"
+                to="/product_list"
+              >
+                <span class="h4">典雅皇室</span>
               </router-link>
             </div>
           </div>
@@ -122,28 +137,46 @@
       <div class="container">
         <h3>最新消息</h3>
         <hr />
-        <div class="row">
-          <div class="col-md-6 d-none d-md-block">
-            <div class="row pb-4">
-              <div class="col-6">
-                <img class="img-fluid rounded" src="../../assets/images/image10.jpg" />
-              </div>
-              <div class="col-6">
-                <h4>
-                  <span class="h5 flicker">NEW 本週新品</span>
+        <div class="row py-3">
+          <div class="col-md-6 pb-5 text-center justify-content-center">
+            <div>
+              <h4>
+                【新品上市】經典歐風淺盤
                 </h4>
-                <p>金與黑的強烈對比，在極為簡單的線條設計下就能帶給人奢華高貴的視覺享受，讓餐桌多了分高雅的摩登感。</p>
-                <p>經典的輪廓設計搭配手工製作，在清新、寧靜且柔和的風格揮灑下，探見生活實用與獨特質感。</p>
-              </div>
+              <img
+                class="img-fluid rounded my-2 l-bg-cover"
+                src="../../assets/images/gift15.jpg"
+              />
+              
+                <h5 class="my-3">限量推出『雲紋陶瓷淺盤』</h5>
+
+              <p>低溫素燒，高溫釉燒，展現清澈透亮的釉彩質感</p>
+              <p>色彩柔和氣質典雅，百搭各種餐具，送禮自用兩相宜</p>
+              <router-link
+                to="/product_list"
+                class="btn btn-sm btn-outline-primary"
+                >限量 5 組</router-link
+              >
             </div>
           </div>
 
           <div class="col-md-6 pb-5 text-center justify-content-center">
             <div>
-              <img class="img-fluid rounded my-2" src="../../assets/images/gift04.jpg" />
-              <h5>歡慶母親節限量推出『法國原木柄不沾鍋』</h5>
-              <p>慰勞辛苦的媽咪就趁現在，限時搶購85折</p>
-              <router-link to="/product_list" class="btn btn-sm btn-outline-secondary">前往市集</router-link>
+              <h4>
+                  <span> 寵愛媽咪送好禮 <i class=" flicker fas fa-heart"></i> <i class=" flicker fas fa-heart"></i></span>
+                </h4>
+              <img
+                class="img-fluid rounded my-2"
+                src="../../assets/images/gift16.jpg"
+              />
+              <h5 class="my-3">孝親限定『法國原木柄不沾鍋』</h5>
+              <p>慢煮、香煎等各式料理手法都能夠輕鬆駕馭</p>
+              <p>送好鍋來慰勞辛苦的媽媽就趁現在，限時搶購85折</p>
+              <router-link
+                to="/product_list"
+                class="btn btn-sm btn-outline-primary"
+                >立即選購</router-link
+              >
             </div>
           </div>
         </div>
@@ -152,7 +185,7 @@
 
     <section id="VideoIntro">
       <div class="container">
-        <h3>影片介紹</h3>
+        <h3>陶瓷工藝</h3>
       </div>
       <div class="bg-light">
         <div class="container">
@@ -162,7 +195,7 @@
                 <iframe
                   width="560"
                   height="315"
-                  src="https://www.youtube.com/embed/he9Vb75mAhw"
+                  src="https://www.youtube.com/embed/he9Vb75mAhw?autoplay=1"
                   frameborder="0"
                   allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
                   allowfullscreen
@@ -172,10 +205,15 @@
             <div class="col-lg-5 p-3">
               <h5 class="text-center">陶藝文化的傳承</h5>
               <hr />
-              <p class="font-intro">陶瓷是中國傳統的工藝品，原本製作充當日常器皿，但後來有藝匠窮其畢生的精力，鑽研講究燒製的方法，使成品精美、細緻無比。</p>
-              <p>陶瓷也可製做各種家庭用品，例如白地青花或福壽五彩等有中國風味的碗盤酒具，或是具有歐洲風味的咖啡杯盤與馬克杯，使飲食起居更具情趣，使室內增添不少生氣與光彩。陶瓷已成為生活中不可或缺的一部份。</p>
-              <p>影片講述陶瓷從捏泥到窯燒的製程，陶藝家對細節的堅持打造出最純粹的藝品，值得一探究竟。</p>
-              <div class="text-center"></div>
+              <p class="font-intro">
+                陶瓷是中國傳統的工藝品，原本製作充當日常器皿，但後來有藝匠窮其畢生的精力，鑽研講究燒製的方法，使成品精美、細緻無比。
+              </p>
+              <p>
+                陶瓷也可製做各種家庭用品，例如白地青花或福壽五彩等有中國風味的碗盤酒具，或是具有歐洲風味的咖啡杯盤與馬克杯，使飲食起居更具情趣，使室內增添不少生氣與光彩。陶瓷已成為生活中不可或缺的一部份。
+              </p>
+              <p>
+                影片講述陶瓷從捏泥到窯燒的製程，陶藝家對細節的堅持將最純粹的藝品帶入日常中，值得細細品味。
+              </p>
             </div>
           </div>
         </div>
@@ -186,16 +224,25 @@
       <div class="container my-4">
         <div class="row no-gutters brand-block">
           <div class="col-md-7 brand-img">
-            <img class="img-fluid rounded" src="../../assets/images/image20.png" />
+            <img
+              class="img-fluid rounded"
+              src="../../assets/images/image20.png"
+            />
           </div>
-          <div class="col-md-6 rounded brand-text d-flex flex-column justify-content-center">
+          <div
+            class="col-md-6 rounded brand-text d-flex flex-column justify-content-center"
+          >
             <div class="h3 mb-4">
               精挑細選造就食材
               <br />與器皿最美好的連結
             </div>
             <div>配色、擺盤、光影的視覺饗宴。</div>
             <small class="mb-5">美味しい</small>
-            <router-link class="btn btn-outline-dark btn-pill ml-auto" to="/product_list">立即挑選</router-link>
+            <router-link
+              class="btn btn-outline-dark btn-pill ml-auto"
+              to="/product_list"
+              >立即挑選</router-link
+            >
           </div>
         </div>
       </div>
@@ -203,19 +250,33 @@
 
     <section id="SubscribeChannel">
       <div class="container">
-        <h3>訂閱頻道</h3>
+        <h3 class="mt-5">訂閱頻道</h3>
         <hr />
         <div class="mb-4 channel-form rounded text-white">
           <h4>取得第一手資訊</h4>
-          <p>喜歡我們的商品嗎？歡迎訂閱我們的頻道並多多分享，新品資訊絕不錯過</p>
+          <p>
+            喜歡我們的商品嗎？歡迎訂閱我們的頻道並多多分享，新品資訊絕不錯過！
+          </p>
           <form class="form-inline justify-content-center">
-            <!-- inline轉行內，justify為置中語法 -->
-            <input type="text" class="channel-content mb-2 mr-3" placeholder="輸入名稱" />
-            <input type="text" class="channel-content mb-2 mr-3" placeholder="輸入信箱" />
-            <button class="btn btn-sm btn-secondary mb-2" @click.prevent="subscriptComplete">送出</button>
+            <input
+              type="text"
+              class="form-control my-2 mr-3 text-center"
+              placeholder="輸入您的暱稱"
+            />
+            <input
+              type="text"
+              class="form-control my-2 mr-3 text-center"
+              placeholder="輸入您的信箱"
+            />
+            <button
+              class= "btn btn-primary  my-2"
+              @click.prevent="subscriptComplete"
+            >
+              送出
+            </button>
           </form>
+          </div>
         </div>
-      </div>
     </section>
   </section>
 </template>
@@ -234,7 +295,7 @@ export default {
         { name: "DISHES", title: "碗盤", icon: "fas fa-mortar-pestle fa-2x" },
         { name: "MUG", title: "杯與壺", icon: "fas fa-mug-hot fa-2x" },
         { name: "SPOON", title: "刀叉匙筷", icon: "fas fa-utensil-spoon fa-2x"},
-        { name: "TOOLS", title: "料理廚具", icon: "fas fa-home fa-2x" },
+        { name: "TOOLS", title: "料理廚具", icon: "fas fa-home fa-2x" }
       ]
     };
   },
@@ -250,22 +311,25 @@ export default {
   }
 };
 
-//SliderTop上滑置頂效果
-$(document).ready(function() {
-  $(".SliderTop").click(function(event) {
-    event.preventDefault();
-    $("html,body").animate(
-      {
-        scrollTop: 0
-      },
-      1000
-    );
-  });
+
+$(function() {
+    $('#SliderTop').click(function(){
+        $('html,body').animate({ scrollTop: 0 }, 'slow');   
+        return false;
+    });
+    
+    //偵測卷軸滑動時，往下滑超過400px就讓按鈕出現//
+    $(window).scroll(function() {
+        if ( $(this).scrollTop() > 400){
+            $('#SliderTop').fadeIn();
+        } else {
+            $('#SliderTop').fadeOut();
+        }
+    });
 });
 </script>
 
 <style lang="scss" scoped>
-
 .SliderTop-img {
   position: fixed;
   bottom: 30px;
@@ -277,6 +341,7 @@ $(document).ready(function() {
   border-style: dotted;
   border-color: rgb(214, 210, 187);
   padding: 5px;
+  z-index: 1000;
 }
 
 .l-bg-cover {
@@ -321,9 +386,15 @@ $(document).ready(function() {
       opacity: 0.8;
       font-size: 40px;
       text-shadow: 0px 2px 10px rgba(0, 0, 0, 0.3);
+
+      @media (max-width: 575.98px) {
+        margin-top:20px;
+        font-size: 28px;
+      }
+    }
     }
   }
-}
+
 
 #CategoryList {
   .category-list {
@@ -332,13 +403,16 @@ $(document).ready(function() {
       display: flex;
       justify-content: center;
       align-items: center;
-      padding: 1rem 0;
-      transition: all 0.5s; //轉場效果
+      padding: 15px 0;
+      transition: all 0.5s;
       cursor: pointer;
-      margin-bottom: 0.5rem; //等價於mb-2
-      margin-top: 0.5rem;
       color: rgb(150, 145, 145);
-      white-space: nowrap; //不換行
+      white-space: nowrap; 
+      @media (max-width: 575.98px) {
+        font-size:10px;
+        padding: 8px 0;
+
+      }
 
       &:hover,
       &:active {
@@ -349,7 +423,7 @@ $(document).ready(function() {
     > li:not(:last-child) {
       //作用在最後一個子元素
       border-right: rgb(228, 224, 224) solid 1px;
-      @media (max-width: 575.98px) {
+      @media (max-width: 768px) {
         border: none;
       }
     }
@@ -425,8 +499,11 @@ $(document).ready(function() {
     }
   }
   .flicker {
-    animation: flicker 2s linear infinite;
-    color: #f3c81aea;
+    animation: flicker 1.5s linear infinite;
+    color: #f7d202;
+  }
+  p{
+    line-height:10px
   }
 }
 
@@ -478,11 +555,11 @@ $(document).ready(function() {
       text-shadow: 1px 1px 1px rgb(3, 50, 56);
     }
     p {
-      font-size: 16px;
+      font-size: 15px;
     }
   }
 
-  .channel-content {
+  .form-control {
     padding: 0.3rem;
     border-radius: 5px;
   }

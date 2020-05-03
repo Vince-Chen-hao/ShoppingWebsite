@@ -3,49 +3,55 @@
     <div class="cart-dropdown">
       <a class="fixPage" @click.prevent="openList()">
         <img class="img-fluid" src="../assets/images/1.png" alt="cart" />
-        <span class="badge badge-pill" v-if="!cartNum == 0">{{cartNum}}</span>
+        <span class="badge badge-pill" v-if="!cartNum == 0">{{ cartNum }}</span>
       </a>
-      <!-- 購物清單Modal -->
+      <!-- 購物清單內容 -->
       <div class="cart-box dropdown-cart-menu" style="display: none">
         <div class="row justify-content-center bg-light border rounded py-2">
           <div class="col-md-12">
-            <div class="dropdown-header mt-3">
+            <div class="dropdown-header">
               <div class="d-flex justify-content-between">
-                <h5>購物車清單</h5>
+                <h4>購物車清單</h4>
                 <a href="#" @click.prevent="closeList()">
-                  <i style="font-size:18px" class="mt-1 far fa-window-close"></i>
+                  <i
+                    style="font-size:18px"
+                    class="mt-1 far fa-window-close"
+                  ></i>
                 </a>
               </div>
-              <span class="text-danger" v-if="total === 0">尚無選購商品</span>
             </div>
             <hr />
+            <div class="text-center" v-if="total === 0">
+              <span class="text-danger">～～～您尚未選購商品～～～</span>
+              <p class="mt-2">優質好物就在眼前，空手而回實在可惜</p>
+            </div>
             <div
               class="dropdown-item d-flex align-items-center"
               v-for="item in cart.carts"
               :key="item.id"
             >
-              <!-- 當變數刪除有值的時候便不會出現按鈕 -->
               <div
-                class="cart-icon d-flex justify-content-center align-items-center mr-4"
-                @click="deleteCartItem(item.id)"
+                class=" disabled cart-icon d-flex justify-content-center align-items-center mr-3"
+                @click.once="deleteCartItem(item.id)"
               >
-                <!-- 點擊後函式的值等於產品id出現轉圈畫面，以id當作判定依據以避免全部進行轉圈 -->
-                <i class="fas fa-spinner fa-pulse" v-if="deleteItem == item.id"></i>
-                <!-- 如果不等於產品id就出現垃圾桶圖樣 -->
+                <!-- 若點擊後函式值等於產品id則畫面轉圈，以id作判定以避免全進行轉圈 -->
+                <i
+                  class="fas fa-spinner fa-pulse"
+                  v-if="deleteItem == item.id"
+                ></i>
+                <!-- 如果不等於產品id就顯示垃圾桶圖樣 -->
                 <i v-else class="fas fa-trash-alt"></i>
               </div>
               <div
-                class="cart-dropdown-item-image bg-cover mr-3"
+                class="cart-dropdown-item-image bg-cover mr-2"
                 :style="{ backgroundImage: `url(${item.product.imageUrl})` }"
               ></div>
-              <div class="mr-4">
-                <h4 class="h6 mb-0">{{ item.product.title }}</h4>
+              <div class="mr-2">
+                <h6 class=" mb-0">{{ item.product.title }}</h6>
                 <span>數量：{{ item.qty }}</span>
               </div>
               <span class="ml-auto text-success">
-                {{
-                item.total | currency
-                }}
+                {{ item.total | currency }}
               </span>
             </div>
             <hr />
@@ -53,7 +59,21 @@
               <span class="mr-3">總計</span>
               <span class="text-success">{{ total | currency }}</span>
             </div>
-            <a class="btn btn-primary btn-block" href="#" @click.prevent="goCheckout">前往結帳</a>
+            <a
+              v-if="total !== 0"
+              class="btn btn-secondary btn-block"
+              href="#"
+              @click.prevent="goCheckout"
+              >前往結帳</a
+            >
+
+            <a
+              v-else
+              class="btn btn-secondary btn-block"
+              href="#"
+              @click.prevent="closeList()"
+              >繼續逛逛</a
+            >
           </div>
         </div>
       </div>
@@ -68,10 +88,7 @@ import { mapGetters } from "vuex";
 export default {
   data() {
     return {
-      //cart: [],
-      //cartNum:0,
-      //total: 0,
-      deleteItem: ""
+      deleteItem: "",
     };
   },
   methods: {
@@ -83,6 +100,8 @@ export default {
       const vm = this;
       const api = `${process.env.APIPATH}/api/${process.env.CUSTOMPATH}/cart/${id}`;
       vm.deleteItem = id;
+
+
       vm.$http.delete(api).then(response => {
         if (response.data.success) {
           vm.getCart();
@@ -94,10 +113,9 @@ export default {
 
     openList() {
       $(".dropdown-cart-menu").toggle();
-      // cart dropdown 10 秒後自動關閉
-      setTimeout(() => {
-        $(".dropdown-cart-menu").fadeOut(2000);
-      }, 15000);
+      // setTimeout(() => {
+      //   $(".dropdown-cart-menu").fadeOut(2000);
+      // }, 15000);
     },
 
     closeList() {
@@ -107,7 +125,7 @@ export default {
     goCheckout() {
       const vm = this;
       if (vm.cartNum !== 0) {
-        this.$router.push("/order_check");
+        vm.$router.push("/order_check");
       }
     }
   },
@@ -119,7 +137,6 @@ export default {
   created() {
     this.getCart();
     const vm = this;
-
     vm.$bus.$on("updateCart", () => {
       vm.getCart();
     });
@@ -139,9 +156,14 @@ export default {
   bottom: 20px;
   height: 65px;
   width: 65px;
-  z-index: 2;
+  z-index: 1000;
   cursor: pointer;
 }
+ 
+.dropdown-header{
+  margin-bottom: -14px;
+}
+
 
 .badge {
   transform: translate(55px, -75px);
@@ -155,7 +177,13 @@ export default {
   right: 85px;
   box-shadow: 0rem 0rem 0.625rem 0.1875rem gray;
   background-color: #fff;
-  z-index: 1;
+  z-index: 1000;
+
+  @media (max-width: 575.98px) {
+    right: 5px;
+    bottom: -10px;
+
+  }
 }
 .fa-window-close {
   margin-left: 120px;

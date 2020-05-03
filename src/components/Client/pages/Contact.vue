@@ -3,8 +3,12 @@
     <div class="container">
       <div class="shop-bg mb-4"></div>
       <div class="text-center p-4" style="font-size:15px">
-        <p>從今天開始，不同於網路的快速方便，踱步到實體展示店，也成了另一種直接感受好物件的選擇</p>
-        <p>用指尖感受產品的重量與溫度，也讓我們輕輕訴說關於它們的故事後，領著它回家，如此的美好就更完整</p>
+        <p>
+          從今天開始，不同於網路的快速方便，踱步到實體展示店，也成了另一種直接感受好物件的選擇
+        </p>
+        <p>
+          用指尖感受產品的重量與溫度，也讓我們輕輕訴說關於它們的故事後，領著它回家，如此的美好就更完整
+        </p>
       </div>
     </div>
 
@@ -33,7 +37,8 @@
                 class="text-dark"
                 href="https://www.google.com/maps?ll=25.028642,121.514732&z=16&t=m&hl=zh-TW&gl=TW&mapclient=embed&q=100%E5%8F%B0%E5%8C%97%E5%B8%82%E4%B8%AD%E6%AD%A3%E5%8D%80%E9%87%8D%E6%85%B6%E5%8D%97%E8%B7%AF%E4%B8%89%E6%AE%B526%E5%B7%B717%E8%99%9F"
               >
-                <i class="fas fa-map-marker-alt"></i> 地址：台北市中正區重慶南路三段 26 巷 17 號
+                <i class="fas fa-map-marker-alt"></i>
+                地址：台北市中正區重慶南路三段 26 巷 17 號
               </a>
               <p class="mt-3">
                 <i class="fas fa-phone-alt"></i> 電話：(02)2523-9811
@@ -53,6 +58,7 @@
     </div>
   </div>
 </template>
+
 <script>
 export default {
   data() {
@@ -64,7 +70,6 @@ export default {
       }
     };
   },
-  components: {}
 };
 </script>
 

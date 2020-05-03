@@ -1,7 +1,11 @@
 <template>
   <div>
-    <div class="productlist-banner d-flex justify-content-center align-items-center">
-      <h1 class="banner-title text-center text-light">購 物 市 集</h1>
+    <div class="productlist-banner ">
+      <div
+        class="dark-overlay d-flex justify-content-center align-items-center"
+      >
+        <h1 class="banner-title text-center text-light">購 物 市 集</h1>
+      </div>
     </div>
 
     <section id="NavSearch">
@@ -12,13 +16,15 @@
             <nav aria-label="breadcrumb">
               <ol class="breadcrumb" style="background:none;">
                 <li class="breadcrumb-item">
-                  <a href="#" class="text-dark">首頁</a>
+                  <router-link class="text-dark" to="/">首頁</router-link>
                 </li>
                 <li class="breadcrumb-item">
-                  <a href="#" class="text-dark">購物市集</a>
+                  <router-link class="text-dark" to="/product_list"
+                    >購物市集</router-link
+                  >
                 </li>
                 <li class="breadcrumb-item" v-if="currentCat !== ''">
-                  <a href="#" class="text-secondary">{{currentCat}}</a>
+                  <span class="text-primary">{{ currentCat }}</span>
                 </li>
               </ol>
             </nav>
@@ -55,90 +61,109 @@
     <!-- Category -->
     <section id="CategoryFilter">
       <div class="container">
-      <div class="row">
-        <div class="col-lg-2">
-          <div class="sticky-top">
-            <div class="list-group mt-4">
-              <a
-                href="#"
-                class="list-group-item list-group-item-action list-group-item-secondary"
-                @click.prevent="filterPro('全部商品')"
-              >
-                <i class="fas fa-align-justify"></i> 全部商品
-              </a>
-              <a
-                href="#"
-                class="list-group-item list-group-item-action"
-                @click.prevent="filterPro('碗盤器皿')"
-              >
-                <i class="fas fa-mortar-pestle"></i> 碗盤器皿
-              </a>
-              <a
-                href="#"
-                class="list-group-item list-group-item-action"
-                @click.prevent="filterPro('杯與壺');"
-              >
-                <i class="fas fa-mug-hot"></i> 杯與壺
-              </a>
-              <a
-                href="#"
-                class="list-group-item list-group-item-action"
-                @click.prevent="filterPro('刀叉匙筷');"
-              >
-                <i class="fas fa-utensil-spoon"></i> 刀叉匙筷
-              </a>
-              <a
-                href="#"
-                class="list-group-item list-group-item-action"
-                @click.prevent="filterPro('料理廚具');"
-              >
-                <i class="fas fa-home"></i> 料理廚具
-              </a>
-            </div>
-          </div>
-        </div>
-
-        <!-- Productlist -->
-        <div class="col-lg-10 text-dark">
-          <div class="row my-4">
-            <div class="col-md-4 mb-4" v-for="(item, index) in filterProducts" :key="index">
-              <div class="card-effect card">
-                <div class="container-img" >
-                  <div
-                    class="l-point productlist-img"
-                    :style="{backgroundImage:`url(${item.imageUrl})`}"
-                    @click="goDetail(item.id)"
-                  ></div>
-                </div>
-                <div class="card-body l-point" @click="goDetail(item.id)">
-                  <span class="badge badge-secondary mb-2">{{ item.category }}</span>
-                  <h5 class="card-title">
-                    <h5 class="text-dark">{{ item.title }}</h5>
-                  </h5>
-                  <p class="card-text">{{ item.content }}</p>
-                  <div class="d-flex justify-content-between align-items-baseline">
-                    <del class="origin-price">NT{{ item.origin_price| currency }}</del>
-                    <div class="now-price">NT{{ item.price| currency }}</div>
-                  </div>
-                </div>
-                <div class="card-footer">
-                  <button
-                    type="button"
-                    class="btn btn-secondary btn-block ml-auto text-dark"
-                    @click="addtoCart(item)"
-                  >
-                    <i class="fas fa-spinner fa-spin" v-if="status.loadingItem === item.id"></i>
-                    <i class="fas fa-shopping-bag"></i><span> 立即選購</span>
-                  </button>
-                </div>
+        <div class="row">
+          <div class="col-lg-2">
+            <div class="sticky-top">
+              <div class="list-group mt-4">
+                <a
+                  href="#"
+                  class="list-group-item list-group-item-action list-group-item-primary"
+                  @click.prevent="filterPro('全部商品')"
+                >
+                  <i class="fas fa-align-justify"></i> 全部商品
+                </a>
+                <a
+                  href="#"
+                  class="list-group-item list-group-item-action"
+                  @click.prevent="filterPro('碗盤器皿')"
+                >
+                  <i class="fas fa-mortar-pestle"></i> 碗盤器皿
+                </a>
+                <a
+                  href="#"
+                  class="list-group-item list-group-item-action"
+                  @click.prevent="filterPro('杯與壺')"
+                >
+                  <i class="fas fa-mug-hot"></i> 杯與壺
+                </a>
+                <a
+                  href="#"
+                  class="list-group-item list-group-item-action"
+                  @click.prevent="filterPro('刀叉匙筷')"
+                >
+                  <i class="fas fa-utensil-spoon"></i> 刀叉匙筷
+                </a>
+                <a
+                  href="#"
+                  class="list-group-item list-group-item-action"
+                  @click.prevent="filterPro('料理廚具')"
+                >
+                  <i class="fas fa-home"></i> 料理廚具
+                </a>
               </div>
             </div>
           </div>
-          <div class="row justify-content-center" v-if="currentCat ==='全部商品'">
-            <Pagination :pageProps="pagination" @pagenum_emit="getProducts"></Pagination>
+
+          <!-- Productlist -->
+          <div class="col-lg-10 text-dark">
+            <div class="row my-4">
+              <div
+                class="col-md-4 mb-4"
+                v-for="(item, index) in filterProducts"
+                :key="index"
+              >
+                <div class="card-effect card">
+                  <div class="container-img">
+                    <div
+                      class="l-point productlist-img"
+                      :style="{ backgroundImage: `url(${item.imageUrl})` }"
+                      @click="goDetail(item.id)"
+                    ></div>
+                  </div>
+                  <div class="card-body l-point" @click="goDetail(item.id)">
+                    <span class="badge category-tag mb-2">{{
+                      item.category
+                    }}</span>
+                    <h5 class="card-title">
+                      <h5 class="text-dark">{{ item.title }}</h5>
+                    </h5>
+                    <p class="card-text">{{ item.content }}</p>
+                    <div
+                      class="d-flex justify-content-between align-items-baseline"
+                    >
+                      <del class="origin-price"
+                        >NT{{ item.origin_price | currency }}</del
+                      >
+                      <div class="now-price">NT{{ item.price | currency }}</div>
+                    </div>
+                  </div>
+                  <div class="card-footer">
+                    <button
+                      type="button"
+                      class="btn btn-bg btn-block ml-auto text-dark"
+                      @click="addtoCart(item)"
+                    >
+                      <i
+                        class="fas fa-spinner fa-spin"
+                        v-if="status.loadingItem === item.id"
+                      ></i>
+                      <i class="fas fa-shopping-bag"></i><span> 立即選購</span>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div
+              class="row justify-content-center"
+              v-if="currentCat === '全部商品'"
+            >
+              <Pagination
+                :pageProps="pagination"
+                @pagenum_emit="getProducts"
+              ></Pagination>
+            </div>
           </div>
         </div>
-      </div>
       </div>
     </section>
     <Shoppingcart />
@@ -146,7 +171,6 @@
 </template>
 
 <script>
-import $ from "jquery";
 import Pagination from "@/components/Pagination";
 import Shoppingcart from "@/components/Shoppingcart";
 
@@ -158,6 +182,7 @@ export default {
   data() {
     return {
       currentCat: "全部商品",
+      Allproducts: [],
       products: [],
       filterData: "",
       filterProducts: [],
@@ -177,20 +202,23 @@ export default {
       }
     };
   },
+  computed: {},
+
   methods: {
+
+    //取得分頁後的產品
     getProducts(page = 1) {
       const api = `${process.env.APIPATH}/api/${process.env.CUSTOMPATH}/products?page=${page}`;
       const vm = this;
       vm.$store.dispatch("updateLoading", true);
-      this.$http.get(api).then(response => {
+      vm.$http.get(api).then(response => {
         vm.products = response.data.products;
-        console.log("取得產品列表:", response.data.products);
-
         vm.filterProducts = response.data.products;
         vm.pagination = response.data.pagination;
         vm.$store.dispatch("updateLoading", false);
       });
     },
+
     addtoCart(item, qty = 1) {
       const api = `${process.env.APIPATH}/api/${process.env.CUSTOMPATH}/cart`;
       const vm = this;
@@ -201,39 +229,45 @@ export default {
           qty
         }
       };
-      this.$http.post(api, cart).then(response => {
+      vm.$http.post(api, cart).then(response => {
         vm.$bus.$emit("updateCart");
-        this.$bus.$emit("message:push", response.data.message, "success");
-        vm.$store.dispatch("updateLoading", false);
-      });
-    },
-    filterPro(name) {
-      const api = `${process.env.APIPATH}/api/${process.env.CUSTOMPATH}/products/all`;
-      const vm = this;
-      vm.currentCat = name;
-      vm.$store.dispatch("updateLoading", true);
-      this.$http.get(api).then(response => {
-        let newArray = [];
-        if (name === "全部商品") {
-          this.getProducts();
-        } else {
-          newArray = response.data.products.filter(product => {
-            return product.category == name;
-          });
-          vm.filterProducts = newArray;
-          vm.products = response.data.products;
-        }
+        vm.$bus.$emit("message:push", response.data.message, "success");
         vm.$store.dispatch("updateLoading", false);
       });
     },
 
+    //取得全部產品
+    getAllproducts() {
+      const api = `${process.env.APIPATH}/api/${process.env.CUSTOMPATH}/products/all`;
+      const vm = this;
+      vm.$http.get(api).then(response => {
+        vm.Allproducts = response.data.products;
+      });
+    },
+
+    //取得分類的產品
+    filterPro(name) {
+      const vm = this;
+      vm.currentCat = name;
+      vm.$store.dispatch("updateLoading", true);
+      let newArray = [];
+      if (name === "全部商品") {
+        vm.getProducts();
+      } else {
+        newArray = vm.Allproducts.filter(product => {
+          return product.category == name;
+        });
+        vm.filterProducts = newArray;
+      }
+      vm.$store.dispatch("updateLoading", false);
+    },
+
+    //關鍵字查詢產品
     filterTitle() {
       const vm = this;
       vm.filterProducts = vm.products.filter(item => {
-        //括號裡的product是自定義稱與回傳return的product做連結，product =products
-        return item.title.indexOf(vm.filterData) > -1; //indexOf查詢陣列位置，“-1”找不到相同的名稱顯示-1
+        return item.title.indexOf(vm.filterData) > -1; //indexOf查詢陣列位置，找不到名稱則顯示-1
       });
-      //https://cythilya.github.io/2017/05/08/javascript-find-item-in-an-array/
       vm.filterData = "";
     },
     goDetail(id) {
@@ -241,20 +275,14 @@ export default {
     }
   },
 
-  filters: {
-    NumCeiling(num) {
-      return Math.ceil(num);
-    }
-  },
-
   created() {
     this.getProducts();
+    this.getAllproducts();
   }
 };
 </script>
 
 <style lang="scss" scoped>
-
 .btn-outline-success:hover {
   color: white;
 }
@@ -268,8 +296,12 @@ export default {
   cursor: pointer;
 }
 
+.sticky-top{
+  z-index: 0;
+}
+
 .productlist-banner {
-  min-height: 30vh;
+  min-height: 27vh;
   position: relative;
   background-size: cover;
   background-position: center center;
@@ -279,15 +311,24 @@ export default {
   .banner-title {
     letter-spacing: 10px;
   }
+  .dark-overlay {
+    min-height: 27vh;
+    width: 100%;
+    background-color: rgba(121, 90, 32, 0.267);
+  }
 }
 
 #NavSearch {
   .breadcrumb-item {
     font-size: 16px;
   }
+  .breadcrumb {
+    padding: 0.75rem 0rem;
+  }
 }
 
 #CategoryFilter {
+
   .list-group-item {
     height: 50px;
     font-size: 15px;
@@ -329,10 +370,20 @@ export default {
     }
   }
   .container-img {
-  height: 200px;
-  overflow: hidden;
-}
-}
+    height: 200px;
+    overflow: hidden;
+  }
+  .category-tag {
+    background-color: rgb(253, 237, 227);
+    color: #534741;
+    font-size: 14px;
+    border-radius: 5px 0 5px 0;
+  }
 
-
+  .card-footer {
+    .btn-bg {
+      background-color: #f1be77;
+    }
+  }
+}
 </style>

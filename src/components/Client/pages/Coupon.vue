@@ -55,7 +55,7 @@
                 <p class="card-text">適用通路：網路 & 實體</p>
                 <p class="card-text">適用商品：限料理廚具</p>
                 <h5 class="coupon-num text-center p-2">XXXXXXXX</h5>
-                <p class="card-text text-muted">活動日期：2020/05/01 - 2020/05/31</p>
+                <p class="card-text text-muted">活動日期：2020/06/01 - 2020/06/30</p>
                 <a href="#" class="btn btn-info btn-block disabled">敬請期待</a>
               </div>
             </div>
@@ -67,7 +67,7 @@
                 <h4 class="card-title text-center"><i class="fas fa-toggle-off"  style="color:gray"></i> 寵愛媽媽5折起</h4>
                 <hr />
                 <p class="card-text">適用通路：網路</p>
-                <p class="card-text">適用商品：限料理廚具</p>
+                <p class="card-text">適用商品：指定商品</p>
                 <h5 class="coupon-num text-center p-2">XXXXXXXX</h5>
                 <p class="card-text text-muted">活動日期：2020/05/19 - 2020/05/20</p>
                 <a href="#" class="btn btn-info btn-block disabled">敬請期待</a>
@@ -81,23 +81,20 @@
 </template>
 
 <script>
-import $ from "jquery";
 import Clipboard from "clipboard";
 
 export default {
-  components: {},
   data() {
     return {};
   },
 
   methods: {
     cobycode() {
-      var _this = this;
-      var clipboard = new Clipboard(".btn-coupon"); //单页面引用
+      let vm = this;
+      let clipboard = new Clipboard(".btn-coupon");
       clipboard.on("success", e => {
-        // 释放内存
-        clipboard.destroy();
-        _this.$bus.$emit(
+        clipboard.destroy(); // 釋放内存記憶體
+        vm.$bus.$emit(
           "message:push",
           "已複製到剪貼簿",
           "success"
@@ -105,14 +102,11 @@ export default {
       });
 
       clipboard.on("error", e => {
-        // 不支持复制
         clipboard.destroy();
-        _this.$bus.$emit("message:push", "複製失敗", "warning");
+        vm.$bus.$emit("message:push", "複製失敗", "warning");
       });
     }
   },
-
-  created() {}
 };
 </script>
 

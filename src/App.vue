@@ -2,36 +2,30 @@
   <div id="app">
     <loading :active.sync="isLoading"></loading>
     <router-view></router-view>
-    
   </div>
 </template>
 
 <script>
-import { mapGetters } from 'vuex';
+import { mapGetters } from "vuex";
 
 export default {
-  name: 'App',
-    components: {
-  },
-  
+  name: "App",
+  components: {},
+
   data() {
     return {};
   },
-  
+
   computed: {
-    ...mapGetters(['isLoading']),
-
-  },
-
-
-
+    ...mapGetters(["isLoading"])
+  }
 };
 </script>
 
 <style lang="scss">
-@import "./assets/all";
+@import "./assets/scss/all.scss";
 
-#app{
+#app {
   font-family: serif;
 }
 </style>

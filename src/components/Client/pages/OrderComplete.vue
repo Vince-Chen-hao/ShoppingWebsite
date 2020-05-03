@@ -6,9 +6,11 @@
       <div class="container mb-5">
         <div class="my-5 row justify-content-center">
           <div class="col-md-6">
-            <i class="fas fa-shopping-bag"></i> 訂單資訊
+            <div class="h5 my-4">
+              <i class="fas fa-shopping-bag "></i> 訂單資訊
+            </div>
             <table class="table my-4">
-              <thead>
+              <thead class="table-warning">
                 <th>品名</th>
                 <th>數量</th>
                 <th>價格</th>
@@ -16,8 +18,12 @@
               <tbody>
                 <tr v-for="item in order.products" :key="item.id">
                   <td class="align-middle">{{ item.product.title }}</td>
-                  <td class="align-middle">{{ item.qty }}/{{ item.product.unit }}</td>
-                  <td class="align-middle text-right">{{ item.final_total | currency}}</td>
+                  <td class="align-middle">
+                    {{ item.qty }}/{{ item.product.unit }}
+                  </td>
+                  <td class="align-middle text-right">
+                    {{ item.final_total | currency }}
+                  </td>
                 </tr>
               </tbody>
               <tfoot>
@@ -27,42 +33,63 @@
                 </tr>
               </tfoot>
             </table>
-            <i class="fas fa-user-check"></i> 訂購人資訊
-            <table class="table my-4">
-              <tbody>
-                <tr>
-                  <th width="100">Email</th>
-                  <td>{{ order.user.email }}</td>
-                </tr>
-                <tr>
-                  <th>姓名</th>
-                  <td>{{ order.user.name }}</td>
-                </tr>
-                <tr>
-                  <th>收件人電話</th>
-                  <td>{{ order.user.tel }}</td>
-                </tr>
-                <tr>
-                  <th>收件人地址</th>
-                  <td>{{ order.user.address }}</td>
-                </tr>
-                <tr>
-                  <th>付款狀態</th>
-                  <td>
-                    <span v-if="!order.is_paid" class="text-danger">尚未付款</span>
-                    <span v-else class="text-success">付款完成</span>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-
-            <div  class="text-right" v-if="order.is_paid === false">
-              <button class="btn btn-primary" @click="payOrder">前往付款</button>
+            <div class="clientinfo " v-if="order.is_paid === false">
+              <div class="h5 pt-4 ">
+                <i class="fas fa-user-check"></i> 訂購人資訊
+              </div>
+              <table class="table my-4">
+                <tbody>
+                  <tr>
+                    <th width="100">Email</th>
+                    <td>{{ order.user.email }}</td>
+                  </tr>
+                  <tr>
+                    <th>姓名</th>
+                    <td>{{ order.user.name }}</td>
+                  </tr>
+                  <tr>
+                    <th>收件人電話</th>
+                    <td>{{ order.user.tel }}</td>
+                  </tr>
+                  <tr>
+                    <th>收件人地址</th>
+                    <td>{{ order.user.address }}</td>
+                  </tr>
+                  <tr>
+                    <th>付款狀態</th>
+                    <td>
+                      <span v-if="!order.is_paid" class="text-danger"
+                        >尚未付款</span
+                      >
+                      <span v-else class="text-success">付款完成</span>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
             </div>
-            <div class="text-right" v-else>
-              <router-link class="btn btn-primary" to="/">回首頁大廳</router-link>
+
+            <div class="payfinish" v-else>
+              <img class="paid-img img-fluid" src="../../../assets/images/paid01.jpg" alt="">
+              <div class=" py-4 my-4 text-dark text-center ">
+                <h4>～～～恭喜您完成購買～～～</h4>
+                <p class="mt-3" style="font-size:15px"><i class="mr-2 fas fa-bullhorn"></i> 全館 7 折優惠倒數中，多款優選商品等你帶回家，歡迎再次光臨！！</p>
+              </div>
             </div>
 
+            <div class="text-right" v-if="order.is_paid === false">
+              <button class="btn btn-secondary" @click="payOrder">
+                前往付款
+              </button>
+            </div>
+            <div class="paid d-flex justify-content-between" v-else>
+              <a href="#" class="btn btn-outline-info" @click="linkHome">
+                回到大廳
+              </a>
+
+              <router-link class="btn btn-outline-secondary" to="/product_list"
+                >繼續逛逛</router-link
+              >
+            </div>
           </div>
         </div>
       </div>
@@ -93,7 +120,7 @@ export default {
       const vm = this;
       vm.$store.dispatch("updateLoading", true);
       const url = `${process.env.APIPATH}/api/${process.env.CUSTOMPATH}/order/${vm.orderId}`;
-      this.$http.get(url).then(response => {
+      vm.$http.get(url).then(response => {
         vm.order = response.data.order;
         vm.$store.dispatch("updateLoading", false);
       });
@@ -103,14 +130,22 @@ export default {
       const api = `${process.env.APIPATH}/api/${process.env.CUSTOMPATH}/pay/${vm.orderId}`;
       vm.$store.dispatch("updateLoading", true);
 
-      this.$http.post(api).then(response => {
-        console.log(response);
+      vm.$http.post(api).then(response => {
         if (response.data.success) {
-          vm.getOrder(); //回傳is_paid已付款訊息
-          this.$bus.$emit("message:push", "你已完成付款，歡迎再次光臨", "success");
+          vm.getOrder(); //回傳已付款訊息
+          vm.$bus.$emit(
+            "message:push",
+            "付款成功",
+            "success"
+          );
         }
         vm.$store.dispatch("updateLoading", false);
       });
+    },
+
+    linkHome() {
+      const vm = this;
+      vm.$router.push({ path: "/" });
     },
   },
 
@@ -120,3 +155,15 @@ export default {
   }
 };
 </script>
+
+<style lang="scss" scoped>
+
+.paid-img {
+  background-position: center center;
+  background-size: cover;
+  width: 750px;
+  height: 250px;
+}
+
+
+</style>
