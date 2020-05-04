@@ -7,15 +7,12 @@
 
 <script>
 import { mapGetters } from "vuex";
-
 export default {
   name: "App",
   components: {},
-
   data() {
     return {};
   },
-
   computed: {
     ...mapGetters(["isLoading"])
   }
@@ -24,10 +21,7 @@ export default {
 
 <style lang="scss">
 @import "./assets/scss/all.scss";
-
 #app {
   font-family: serif;
 }
 </style>
-
-

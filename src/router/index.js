@@ -1,141 +1,104 @@
-import Vue from 'vue'
-import VueRouter from 'vue-router'
-//官方元件
-
-//pages
-import Login from '@/components/Login';
-
-//admin
-import Dashboard from '@/components/Admin/Dashboard';
-import Products from '@/components/Admin/pages/Products';
-import Order from '@/components/Admin/pages/Order';
-import Coupon from '@/components/Admin/pages/Coupon';
-
-
-
-//client
-import Layout from '@/components/Client/Layout';
-import Home from '@/components/Client/Home';
-import ProductList from '@/components/Client/pages/ProductList';
-import ProductDetail from '@/components/Client/pages/ProductDetail';
-import OrderCheck from '@/components/Client/pages/OrderCheck';
-import ClientInfo from '@/components/Client/pages/ClientInfo';
-import OrderComplete from '@/components/Client/pages/OrderComplete';
-import CouponPage from '@/components/Client/pages/Coupon';
-import ContactPage from '@/components/Client/pages/Contact';
-
-
-
-
-
-
+import Vue from "vue";
+import VueRouter from "vue-router";
 
 Vue.use(VueRouter);
-//啟用VueRouter
 
 export default new VueRouter({
-    linkActiveClass: 'active', //範例提供
-    routes: [
+  routes: [
+    {
+      //輸入錯誤回傳頁面
+      path: "*",
+      redirect: "/login"
+    },
 
-        { //輸入錯誤網址會回到login頁
-            path: '*',
-            redirect: '/login',
+    {
+      path: "/login",
+      name: "Login",
+      component: () => import("@/views/Back/Login.vue")
+    },
+
+    {
+      path: "/admin",
+      name: "Dashboard",
+      component: () => import("@/views/Back/Dashboard.vue"),
+      children: [
+        {
+          path: "products",
+          name: "products",
+          component: () => import("@/views/Back/Products.vue"),
+          meta: { requiresAuth: true } //導航守衛
         },
 
         {
-            path: '/login',
-            name: 'Login',
-            component: Login,
-        },
-
-
-        {
-            path: '/admin',
-            name: 'Dashboard',
-            component: Dashboard,
-            children: [{
-                    path: 'products',
-                    name: 'products',
-                    component: Products,
-                    //meta: { requiresAuth: true }, //導航守衛
-                },
-
-                {
-                    path: 'orders',
-                    name: 'orders',
-                    component: Order,
-                    //meta: { requiresAuth: true },
-                },
-
-                {
-                    path: 'coupons',
-                    name: 'coupons',
-                    component: Coupon,
-                    //meta: { requiresAuth: true },
-                },
-
-            ]
-
-
+          path: "orders",
+          name: "orders",
+          component: () => import("@/views/Back/Order.vue")
+          //meta: { requiresAuth: true },
         },
 
         {
-            path: '/',
-            name: 'Layout',
-            component: Layout,
-            children: [{
-                    path: '/',
-                    name: 'Home',
-                    component: Home,
-                },
+          path: "coupons",
+          name: "coupons",
+          component: () => import("@/views/Back/Coupon.vue")
+          //meta: { requiresAuth: true },
+        }
+      ]
+    },
 
-                {
-                    path: 'product_list',
-                    name: 'ProductList',
-                    component: ProductList,
-                    props: route => ({ category: route.query.category }),
-
-                },
-
-                {
-                    path: 'product_detail/:MyproductId', //更換為productlist的參數ID
-                    name: 'ProductDetail',
-                    component: ProductDetail,
-                },
-
-                {
-                    path: 'coupon_page',
-                    name: 'CouponPage',
-                    component: CouponPage,
-                },
-
-                {
-                    path: 'contact_page',
-                    name: 'ContactPage',
-                    component: ContactPage,
-                },
-
-                {
-                    path: 'order_check',
-                    name: 'OrderCheck',
-                    component: OrderCheck,
-                },
-
-                {
-                    path: 'client_info',
-                    name: 'ClientInfo',
-                    component: ClientInfo,
-                },
-
-                {
-                    path: 'order_complete/:orderId',
-                    name: 'OrderComplete',
-                    component: OrderComplete,
-                },
-
-            ]
-
-
+    {
+      path: "/",
+      name: "Layout",
+      component: () => import("@/views/Front/Layout.vue"),
+      children: [
+        {
+          path: "",
+          name: "Home",
+          component: () => import("@/views/Front/Home.vue")
         },
-    ],
+
+        {
+          path: "product_list",
+          name: "ProductList",
+          component: () => import("@/views/Front/ProductList.vue"),
+          props: route => ({ category: route.query.category })
+        },
+
+        {
+          path: "product_detail/:MyproductId", //productlist的參數ID
+          name: "ProductDetail",
+          component: () => import("@/views/Front/ProductDetail.vue")
+        },
+
+        {
+          path: "coupon_page",
+          name: "CouponPage",
+          component: () => import("@/views/Front/Coupon.vue")
+        },
+
+        {
+          path: "contact_page",
+          name: "ContactPage",
+          component: () => import("@/views/Front/Contact.vue")
+        },
+
+        {
+          path: "order_check",
+          name: "OrderCheck",
+          component: () => import("@/views/Front/OrderCheck.vue")
+        },
+
+        {
+          path: "client_info",
+          name: "ClientInfo",
+          component: () => import("@/views/Front/ClientInfo.vue")
+        },
+
+        {
+          path: "order_complete/:orderId",
+          name: "OrderComplete",
+          component: () => import("@/views/Front/OrderComplete.vue")
+        }
+      ]
+    }
+  ]
 });
